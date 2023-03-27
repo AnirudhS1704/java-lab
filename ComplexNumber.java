@@ -1,61 +1,81 @@
 import java.util.Scanner;
-public class complex {
-   static Scanner sc = new Scanner(System.in);
-    double real;
-    double imag;
 
-    public complex(double real, double imag) {
+public class Complex {
+    int real, imag;
+
+    Complex(int real, int imag) {
         this.real = real;
         this.imag = imag;
     }
 
+    public Complex sum(Complex c1, Complex c2) {
+        Complex c3 = new Complex(c1.real + c2.real, c1.imag + c2.imag);
+        return c3;
+    }
+
+    public Complex difference(Complex c1, Complex c2) {
+        Complex c3 = new Complex(c1.real - c2.real, c1.imag - c2.imag);
+        return c3;
+    }
+
+    public Complex product(Complex c1, Complex c2) {
+        Complex c3 = new Complex(c1.real * c2.real - c1.imag * c2.imag, c1.real * c2.imag + c1.imag * c2.real);
+        return c3;
+    }
+
     public static void main(String[] args) {
-         double a,b,c,d;
-        System.out.println("Enter the real and imaginary part of first complex number");
-        a = sc.nextDouble();
-        b = sc.nextDouble();
-        System.out.println("Enter the real and imaginary part of second complex number");
-        c = sc.nextDouble();
-        d = sc.nextDouble();
+        int a, r1, i1, r2, i2;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter 1. Add");
+        System.out.println("2. Subtract");
+        System.out.println("3. Multiply");
 
-        complex n1 = new complex(a, b),
-                n2 = new complex(c, d),
-                temp1,
-                temp2,
-                temp3;
-                
+        while (true) {
+            System.out.print("->\t");
+            a = sc.nextInt();
 
-        temp1 = n1.add(n1, n2);
-        temp2 = n1.subtract(n1, n2);
-        temp3 = n1.multiply(n1, n2);
+            switch (a) {
+                case 1:
+                    System.out.println("Enter real and imaginary part of complex number 1");
+                    r1 = sc.nextInt();
+                    i1 = sc.nextInt();
+                    Complex c1 = new Complex(r1, i1);
+                    System.out.println("Enter real and imaginary part of complex number 2");
+                    r2 = sc.nextInt();
+                    i2 = sc.nextInt();
+                    Complex c2 = new Complex(r2, i2);
+                    Complex c3 = c1.sum(c1, c2);
+                    System.out.println("The sum = " + c3.real + " + i" + c3.imag);
+                    break;
+                case 2:
+                    System.out.println("Enter real and imaginary part of complex number 1");
+                    r1 = sc.nextInt();
+                    i1 = sc.nextInt();
+                    c1 = new Complex(r1, i1);
+                    System.out.println("Enter real and imaginary part of complex number 2");
+                    r2 = sc.nextInt();
+                    i2 = sc.nextInt();
+                    c2 = new Complex(r2, i2);
+                    c3 = c1.difference(c1, c2);
+                    System.out.println("The difference = " + c3.real + " + i" + c3.imag);
+                    break;
+                case 3:
+                    System.out.println("Enter real and imaginary part of complex number 1");
+                    r1 = sc.nextInt();
+                    i1 = sc.nextInt();
+                    c1 = new Complex(r1, i1);
+                    System.out.println("Enter real and imaginary part of complex number 2");
+                    r2 = sc.nextInt();
+                    i2 = sc.nextInt();
+                    c2 = new Complex(r2, i2);
+                    c3 = c1.product(c1, c2);
+                    System.out.println("The product = " + c3.real + " + i" + c3.imag);
+                    break;
 
-        System.out.println("Sum: "+temp1.real+"+"+"i"+temp1.imag);
-        System.out.println("Difference: "+temp2.real+"+"+"i"+temp2.imag);
-        System.out.println("Product: "+temp3.real+"+"+"i"+temp3.imag);
+                default:
+                    break;
+            }
+        }
     }
 
-    public complex add(complex n1, complex n2)
-    {
-        complex temp = new complex(0.0, 0.0);
-        temp.real = n1.real + n2.real;
-        temp.imag = n1.imag + n2.imag;
-        
-        return(temp);
-    }
-    public complex subtract(complex n1, complex n2)
-    {
-        complex temp = new complex(0.0, 0.0);
-        temp.real = n1.real - n2.real;
-        temp.imag = n1.imag - n2.imag;
-
-        return(temp);
-    }
-    public complex multiply(complex n1, complex n2)
-    {
-        complex temp = new complex(0.0, 0.0);
-        temp.real = n1.real * n2.real - n1.imag * n2.imag;
-        temp.imag = n1.real + n2.imag - n1.imag * n2.real;
-
-        return(temp);
-    }
 }
