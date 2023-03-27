@@ -4,7 +4,7 @@ import Q10.ISE.ISE_Department;
 // import Q10.Faculty;
 
 
-public class MainClass {
+public class Main {
    
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
