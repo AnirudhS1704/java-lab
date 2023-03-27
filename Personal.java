@@ -1,124 +1,104 @@
 import java.util.Scanner;
 
 public class Personal {
-    String name;
-    String education;
-    int age;
-    int basic;
-    int hra;
-    int da;
-    int yoe;
-    int no_of_loans;
-    double[] loan_amt;
+    String name, edu;
+    int age, basic, hra, da, yoe, noOfLoans, loanAmt;
 
-    Personal(String name, String education, int age, int basic, int hra, int da, int yoe, int no_of_loans, double[] loan_amt)
-    {
+    Personal(String name, String edu, int age, int basic, int hra, int da, int yoe, int noOfLoans, int loanAmt) {
         this.name = name;
         this.age = age;
-        this.education = education;
+        this.edu = edu;
         this.basic = basic;
         this.hra = hra;
         this.da = da;
         this.yoe = yoe;
-        this.no_of_loans = no_of_loans;
-        this.loan_amt = loan_amt;
-    }
-    void isEligible(Personal p)
-    {
-        if (p.basic+p.hra+p.da >= 600000 && p.no_of_loans <=2)
-        {
-            System.out.println("Eligible for loan");
-        }
-        else {
-            System.out.println("Not eligible for loan");
-        }
+        this.noOfLoans = noOfLoans;
+        this.loanAmt = loanAmt;
     }
 
-    void taxpay(Personal p)
-    {
-        int tax;
-        if (p.basic >300000)
-        {
+    boolean isEligible() {
+        if (yoe > 2 && noOfLoans < 2) {
+            return true;
+        }
+        return false;
+    }
+
+    double taxPay() {
+        double tax;
+        if (basic < 10000) {
             tax = 0;
+        } else if (basic < 50000) {
+            tax = 0.1 * basic;
+        } else if (basic < 100000) {
+            tax = 0.2 * basic;
+        } else {
+            tax = 0.3 * basic;
         }
-        else if(p.basic >500000){
-            tax = (int) (0.1*(p.basic));
-        }
-        else {
-            tax = (int) (0.3 * p.basic);
-        }
-        System.out.println("tax = "+tax);;
+        return tax;
     }
 
-    void isEligiblePromotion(Personal p)
-    {
-        if (p.yoe>=3 && p.no_of_loans == 0)
-        {
-            System.out.println("Eligible for promotion");
+    boolean isEligiblePromotion() {
+        if (basic > 20000 && yoe > 4) {
+            return true;
         }
-        else {
-            System.out.println("Not eligible for promotion");
-        }
+        return false;
     }
 
-    void display(Personal p)
-    {
-        System.out.println("name: "+p.name);
-        System.out.println("age: "+p.age);
-        System.out.println("education: "+p.education);
-        int salary = p.basic + p.hra + p.da;
-        System.out.println("salary: "+salary);
-        System.out.println("years of experience: "+p.yoe);
-        System.out.println("no of loans: "+p.no_of_loans);
-        int sum=0;
-        for (int i=0; i<p.loan_amt.length; i++)
-        {
-            sum+=p.loan_amt[i];
-        }
-        System.out.println("loan amount: "+ sum);
-        System.out.println("name: "+p.name);
-        p.isEligible(p);
-        p.isEligiblePromotion(p);
-        p.taxpay(p);
+    void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Education: " + edu);
+        int salary = basic + hra + da;
+        System.out.println("Salary: " + salary);
+        System.out.println("Years of expreience: " + yoe);
+        System.out.println("No of loans: " + noOfLoans);
+        System.out.println("Total loan amount: " + loanAmt);
+
+        boolean isEligible = isEligible();
+        double tax = taxPay();
+        boolean isEligiblePromotion = isEligiblePromotion();
+
+        System.out.println("Is eligible for loan: " + isEligible);
+        System.out.println("Tax: " + tax);
+        System.out.println("Is eligible for promotion: " + isEligiblePromotion);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n;
-        System.out.println("Enter the number of employees whose details are to be entered");
-        n = sc.nextInt();
-        for (int i=0; i<n; i++)
-        {
-            System.out.println("Enter the name");
-//            System.out.println();
-            String name = sc.next();
-            System.out.println("Enter the age");
-            int age = sc.nextInt();
-            System.out.println("Enter the education");
-            String education = sc.next();
-            System.out.println("Enter the basic");
-            int basic = sc.nextInt();
-            System.out.println("Enter the hra");
-            int hra = sc.nextInt();
-            System.out.println("Enter the da");
-            int da = sc.nextInt();
-            System.out.println("Enter the years of experience");
-            int yoe = sc.nextInt();
-            System.out.println("Enter the no. of loans");
-            int no_of_loans = sc.nextInt();
-            double[] loan_amt = new double[no_of_loans];
+        String name, edu;
+        int age, basic, hra, da, yoe, noOfLoans, loanAmt;
+        System.out.println("Enter the number of employees");
+        int n = sc.nextInt();
+        Personal[] personals = new Personal[n];
 
-            System.out.println("Enter the loan amount");
-            for (int j=0; j<no_of_loans; j++)
-            {
-                loan_amt[j] = sc.nextDouble();
-            }
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details of person " + i);
+            System.out.println("Enter name");
+            name = sc.next();
+            System.out.println("Enter age");
+            age = sc.nextInt();
+            System.out.println("Enter education");
+            edu = sc.next();
+            System.out.println("Enter basic");
+            basic = sc.nextInt();
+            System.out.println("Enter hra");
+            hra = sc.nextInt();
+            System.out.println("Enter da");
+            da = sc.nextInt();
+            System.out.println("Enter years of experience");
+            yoe = sc.nextInt();
+            System.out.println("Enter number of loans");
+            noOfLoans = sc.nextInt();
+            System.out.println("Enter loan amount");
+            loanAmt = sc.nextInt();
 
-            Personal p1 = new Personal(name, education, age, basic, hra, da,yoe, no_of_loans, loan_amt);
-            p1.display(p1);
-
-
+            personals[i] = new Personal(name, edu, age, basic, hra, da, yoe, noOfLoans, loanAmt);
         }
-    }
+        for (int i = 0; i < n; i++) {
+            System.out.println("Displaying person " + i);
+            personals[i].display();
+            System.out.println();
+        }
 
+    }
 }
