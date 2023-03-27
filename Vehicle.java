@@ -39,6 +39,28 @@ class TwoWheeler extends Vehicle{
         System.out.println("mileage: "+mileage);
         System.out.println("cc: "+cc);
     }
+     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter year of manufacture of four wheeler");
+        int year = sc.nextInt();
+        FourWheeler fourWheeler = new FourWheeler(year);
+
+        System.out.println("Enter year of manufacture of two wheeler");
+        year = sc.nextInt();
+        TwoWheeler twoWheeler = new TwoWheeler(year);
+
+        fourWheeler.getData();
+        fourWheeler.putdata();
+
+        twoWheeler.getData();
+        twoWheeler.putdata();
+
+        System.out.println("Enter the year of manufacture, gear type, mileage");
+        year = sc.nextInt();
+        String gear = sc.next();
+        int mileage = sc.nextInt();
+        MyTwoWheeler myTwoWheeler = new MyTwoWheeler(year, gear, mileage);
+    }
 }
 final class FourWheeler extends Vehicle{
     Scanner sc = new Scanner(System.in);
@@ -83,30 +105,5 @@ class  MyTwoWheeler extends TwoWheeler{
 
         System.out.println("Gear type: "+ gearType);
         System.out.println("mileage: "+ mileage);
-    }
-}
-
-class DemoVehicle{
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter year of manufacture of four wheeler");
-        int year = sc.nextInt();
-        FourWheeler fourWheeler = new FourWheeler(year);
-
-        System.out.println("Enter year of manufacture of two wheeler");
-        year = sc.nextInt();
-        TwoWheeler twoWheeler = new TwoWheeler(year);
-
-        fourWheeler.getData();
-        fourWheeler.putdata();
-
-        twoWheeler.getData();
-        twoWheeler.putdata();
-
-        System.out.println("Enter the year of manufacture, gear type, mileage");
-        year = sc.nextInt();
-        String gear = sc.next();
-        int mileage = sc.nextInt();
-        MyTwoWheeler myTwoWheeler = new MyTwoWheeler(year, gear, mileage);
     }
 }
